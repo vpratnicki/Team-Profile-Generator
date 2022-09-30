@@ -1,11 +1,9 @@
-const Employee = require('../lib/Employee');
+const Employee = require('../lib/Employee.js');
 
-describe('Employee class', () => {
-    describe('getName method', () => {
-        it('displays the name of the employee', () => {
-            const employee = new Employee('Charles');
+test('creates employee object', () => {
+    const employee = new Employee ('Charles');
 
-            expect(employee.name).toBe('Dave');
-        })
-    })
+    expect(employee.name).toBe('Charles');
+    // expect(employee.id).toBe('350');
+    // expect(emplyee.email).toBe('meow@cat.net');
 });
