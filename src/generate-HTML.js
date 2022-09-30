@@ -11,7 +11,7 @@ const writeFile = fileContent => {
             // if everything went well, resolve the Promise and send the succesfull data to the `.then()` method
             resolve({
                 ok: true,
-                message: 'README created!'
+                message: 'HTML created!'
             });
         });
     });
