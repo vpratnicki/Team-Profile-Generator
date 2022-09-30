@@ -1,0 +1,25 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vpratnicki/Team-Profile-Generator.git"
+  },
+  "author": "Vanessa Pratnicki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vpratnicki/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/vpratnicki/Team-Profile-Generator#readme",
+  "devDependencies": {
+    "jest": "^29.1.2"
+  },
+  "dependencies": {
+    "inquirer": "^9.1.2"
+  }
+}
