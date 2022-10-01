@@ -16,6 +16,6 @@ test('create employee name object', () => {
 
 test('create employee id object', () => {
     const testId = 350;
-    const e = new Employee(testId);
-    expect(e.testId).toBe(testId);
+    const e = new Employee('Charles', testId);
+    expect(e.id).toBe(testId);
 });
