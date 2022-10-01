@@ -25,3 +25,8 @@ test('create employee email', () => {
     const employee = new Employee('Charles', 350, testEmail);
     expect(employee.email).toBe(testEmail);
 });
+
+test('gets employee role', () => {
+    const employee = new Employee('Charles', 350, 'meow@cat.net');
+    expect(employee.role).toBe('Employee');
+});
