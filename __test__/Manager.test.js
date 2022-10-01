@@ -19,11 +19,11 @@ test('create manager email', () => {
     const manager = new Manager('Nala', 450, testEmail);
     expect(manager.email).toBe(testEmail);
 });
-// this is the test that not only fails, but then fails the tests above
+
 test('create manager office number', () => {
-    // const testOfficeNumber = '443-220-1234';
-    const manager = new Manager('Nala', 450, 'meow2@cat.net');
-    expect(manager.officeNumber).toBe(5);
+    const testOfficeNumber = '443-220-1234';
+    const manager = new Manager('Nala', 450, 'meow2@cat.net', testOfficeNumber);
+    expect(manager.officeNumber).toBe(testOfficeNumber);
 });
 
 test('gets manager role', () => {

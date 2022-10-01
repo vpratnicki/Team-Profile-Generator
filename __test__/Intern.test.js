@@ -19,3 +19,16 @@ test('create intern email', () => {
     const intern = new Intern('Charles', 350, testEmail);
     expect(intern.email).toBe(testEmail);
 });
+
+test('return intern school', () => {
+    const testSchool = 'Cat University';
+    const intern = new Intern('Chi Chi', 150, 'meow3@cat.net', testSchool);
+    expect(intern.school).toBe(testSchool);
+});
+
+test('return intern school & role', () => {
+    const testSchool = 'Cat University'
+    const intern = new Intern('Chi Chi', 150, 'meow3@cat.net', testSchool);
+    expect(intern.school).toBe(testSchool);
+    expect(intern.role).toBe('Intern');
+});
