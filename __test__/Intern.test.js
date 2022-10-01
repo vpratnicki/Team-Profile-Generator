@@ -1,20 +1,21 @@
-// const Employee = require('../lib/Employee');
+const Employee = require('../lib/Employee');
+const Intern = require('../lib/Intern');
 
-// //making sure intern inherited the employe classes
-// test('create employee name object', () => {
-//     const name = 'Charles';
-//     const employee = new Employee(name);
-//     expect(employee.name).toBe(name);
-// });
+//making sure intern inherited the employe classes
+test('create intern name object', () => {
+    const name = 'Charles';
+    const intern = new Intern(name);
+    expect(intern.name).toBe(name);
+});
 
-// test('create employee id object', () => {
-//     const testId = 350;
-//     const employee = new Employee('Charles', testId);
-//     expect(employee.id).toBe(testId);
-// });
+test('create intern id object', () => {
+    const testId = 350;
+    const intern = new Intern('Charles', testId);
+    expect(intern.id).toBe(testId);
+});
 
-// test('create employee email', () => {
-//     const testEmail = 'meow@cat.net';
-//     const employee = new Employee('Charles', 350, testEmail);
-//     expect(employee.email).toBe(testEmail);
-// });
+test('create intern email', () => {
+    const testEmail = 'meow@cat.net';
+    const intern = new Intern('Charles', 350, testEmail);
+    expect(intern.email).toBe(testEmail);
+});
