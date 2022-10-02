@@ -6,7 +6,6 @@ const generateManager = (manager) => {
       <p>${manager.id}</p>
       <p>${manger.email}</p>
       <p>${manager.officeNumber}</p>
-
     </section>
   `;
 };
