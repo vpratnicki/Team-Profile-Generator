@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 // const { writeFile, copyFile } = require('./src/generate-site');
 const Manager = require('./lib/Manager');
 
-const promptManager = () => {
+const promptManager = (managerData) => {
     return inquirer
       .prompt([{
         type: 'input',
@@ -29,8 +29,8 @@ const promptManager = () => {
 };
   
   promptManager()
-    .then(employeeData => {
-      console.log(employeeData);
+    .then(managerData => {
+      console.log(managerData);
       // will be uncommented in lesson 4
       // const pageHTML = generatePage(portfolioData);
       // fs.writeFile('./index.html', pageHTML, err => {
