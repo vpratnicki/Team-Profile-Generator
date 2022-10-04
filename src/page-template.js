@@ -1,3 +1,7 @@
+const Manager = require('./lib/Manager');
+
+
+
 
 const generateManager = (managerData) => {
     return `
@@ -47,7 +51,7 @@ const generateIntern = (internData) => {
     `
 };
 
-module.exports = templateData => {
+function generatetemplate(employeesArr) {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -72,12 +76,22 @@ module.exports = templateData => {
       </header>
       <main class="container bg-image">
         <div class="card-deck">
-            ${generateManager(managerData)}
-            ${generateEngineer(engineerData)}
-            ${generateEngineer(engineerData)}
+            ${generateManager(employeesArr[0])}
+            ${decideNextCard(employeesArr)}
         </div>
       </main>
     </body>
     </html>
     `
 }
+
+function decideNextCard(employeesArr) {
+    let html = ''
+    // for each remaning emplyee
+            // -- if employee is eng
+            ${generateEngineer(engineerData)}
+            // -- else
+            ${generateEngineer(internData)}
+}
+
+module.exports = generatetemplate;
