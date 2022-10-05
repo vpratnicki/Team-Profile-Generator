@@ -52,6 +52,7 @@ const generateIntern = (internData) => {
 };
 
 function generatetemplate(employeesArr) {
+    const empCards = getEmployeeCards(employeesArr);
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -76,8 +77,7 @@ function generatetemplate(employeesArr) {
       </header>
       <main class="container bg-image">
         <div class="card-deck">
-            ${generateManager(employeesArr[0])}
-            ${decideNextCard(employeesArr)}
+            ${empCards.join('')}
         </div>
       </main>
     </body>
@@ -85,13 +85,22 @@ function generatetemplate(employeesArr) {
     `
 }
 
-function decideNextCard(employeesArr) {
-    let html = ''
-    // for each remaning emplyee
-            // -- if employee is eng
-            ${generateEngineer(engineerData)}
-            // -- else
-            ${generateEngineer(internData)}
+function getEmployeeCards(employeesArr) {
+    const cards = [];
+    for (let i = 0; i < employeesArr.length; i++) {
+        switch(employeesArr[i].role) {
+            case 'Manager':
+                cards.push(generateManager(employeesArr[i]))
+                break;
+            case 'Engineer':
+                cards.push(generateEngineer(employeesArr[i]))
+                break;
+            case 'Intern':
+                cards.push(generateIntern(employeesArr[i]))
+                break;
+        }
+    }
+    return cards;
 }
 
 module.exports = generatetemplate;

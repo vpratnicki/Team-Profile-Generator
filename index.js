@@ -6,10 +6,10 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Employee = require("./lib/Employee");
 
-// have and array to store my employees
-let employees = [];
+// have an array to store my employees
+const employees = [];
 
-const promptManager = (managerData) => {
+function promptManager() {
   return inquirer.prompt([
     {
       type: "input",
@@ -29,93 +29,64 @@ const promptManager = (managerData) => {
     {
       type: "input",
       name: "officeNumber",
-      message: "Enter the manager's office number",
-    },
-  ]);
+      message: "Enter the manager's office number"
+    }
+  ])
+    .then(answers => {
+    // -- then create an manger object
+    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+    
+    // -- add it to the array
+    employees.push(manager);
+    console.log(manager);
+    addEmployees();
+})
 };
 
-const promptContinue = () => {
-  return inquirer.prompt([
-      {
-        type: "confirm",
-        name: "employee",
-        message: "Would you like to add a new employee?",
-        default: true
-      },
+function addEmployees() {
+  return inquirer
+    .prompt([
       {
         type: "list",
-        name: "continueResults.choice",
-        message: "Choose which type of employee to add:",
-        choices: ["engineer", "intern"],
-        when: ({ confirmAddEmployee }) => confirmAddEmployee,
-      },
+        name: "employeeRole",
+        message: "Would you like to add a new employeeto your team?",
+        choices: ['Engineer', 'Intern', 'No thanks, no more emploeeys to add']
+      }
     ])
-.then(handleContinue());
-};
-
-const handleContinue = (continueResults) => {
-  // if they choose engineer
-  if (continueResults.choice === "engineer") {
-    // -- prompt for engineer
-    promptEngineer().then((engResults) => {
-      // -- then create an eng object
-      const engineer = new Engineer(
-        engineerData.name,
-        engineerData.id,
-        engineerData.email,
-        engineerData.gitHub
-      );
-      // -- add it to the array
-      employees.push(engineer);
-      // -- prompt the user if they want to add an intern or add and engineer or quit
-      promptContinue();
-      // .then(handleContinue);
-    });
-    // if they choose intern
-  } else if (continueResults.choice === "intern") {
-    // -- prompt for intern
-    promptIntern().then((intResults) => {
-      // -- then create an eng object
-      const intern = new Intern(
-        internData.name,
-        internData.id,
-        internData.email,
-        internData.school
-      );
-      // -- add it to the array
-      employees.push(intern);
-
-      promptContinue();
-      // .then(handleContinue);
-    });
-  } else {
-    return employees;
-  }
-
-  // if they choose quit
-  // -- generate html
-};
-
-const promptEngineer = () => {
+    .then(choice => {
+      switch (choice.employeeRole) {
+        case 'Engineer':
+          promptEngineer();
+          break;
+        case 'Intern':
+          promptIntern();
+          break;
+        case 'No thanks, no more emploeeys to add':
+          // finalTeam();
+          break;
+      }
+    })
+  };
+function promptEngineer () {
   return inquirer.prompt([
     {
       type: "input",
-      name: "engineer.name",
+      name: "name",
       message: "Enter the Engineer's name?",
     },
     {
       type: "input",
-      name: "engineer.id",
+      name: "id",
       message: "Enter the Engineer's ID number",
     },
     {
       type: "input",
-      name: "engineer.email",
+      name: "email",
       message: "Enter the Engineer's email",
     },
     {
       type: "input",
-      name: "engineer.github",
+      name: "github",
       message: "Enter your GitHub Username (Required)",
       validate: (githubInput) => {
         if (githubInput) {
@@ -124,52 +95,70 @@ const promptEngineer = () => {
           console.log("Please enter your GitHub username!");
           return false;
         }
-      },
-    },
-  ]);
+      }
+    }
+  ])
+  .then(answers => {
+    // -- then create an eng object
+    const engineer = new Engineer(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.github
+    );
+    // -- add it to the array
+    employees.push(engineer);
+    console.log(engineer);
+    // -- ask if new employees needed
+    addEmployees()
+  });
 };
 
-const promptIntern = () => {
+function promptIntern() {
   return inquirer.prompt([
     {
       type: "input",
-      name: "intern.name",
+      name: "name",
       message: "Enter the intern's name",
     },
     {
       type: "input",
-      name: "intern.id",
+      name: "id",
       message: "Enter the intern's ID number",
     },
     {
       type: "input",
-      name: "intern.email",
+      name: "email",
       message: "Enter the intern's email",
     },
     {
       type: "input",
-      name: "intern.school",
+      name: "school",
       message: "Enter the intern's school",
-    },
-  ]);
+    }
+  ]).then (answers => {
+    const intern = new Intern(
+      answers.name,
+      answers.id,
+      answers.email,
+      answers.school
+    );
+    // -- add it to the array
+    employees.push(intern);
+    console.log(intern);
+    // -- ask if new employees needed
+    addEmployees();
+  });
 };
 
+// -- funct that runs generate-site.js 
+// function finalTeam()
+
 promptManager()
-.then((managerData) => {
-  console.log(managerData);
-  const manager = new Manager(
-    managerData.name,
-    managerData.id,
-    managerData.email,
-    managerData.officeNumber
-  );
+// .then(employees => {
+//   console.log(employees)
+//  });
 
-  // add our manager to the list of employees
-  employees.push(manager);
 
-  // prompt the user if they want to add an intern or add and engineer or quit
-  promptContinue()
-  .then(handleContinue);
-});
 
 
