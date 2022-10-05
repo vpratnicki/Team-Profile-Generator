@@ -1,10 +1,12 @@
 const inquirer = require("inquirer");
-// const generatePage = require('./src/page-template');
-// const { writeFile, copyFile } = require('./src/generate-site');
+const fs = require("fs");
+
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const Employee = require("./lib/Employee");
+
+const generatePage = require('./src/page-template');
+
 
 // have an array to store my employees
 const employees = [];
@@ -62,12 +64,17 @@ function addEmployees() {
           promptIntern();
           break;
         case 'No thanks, no more emploeeys to add':
-          // finalTeam();
+          finalTeam();
           break;
       }
     })
   };
 function promptEngineer () {
+  console.log(`
+  ==============
+  Add a Engineer
+  ==============
+  `);
   return inquirer.prompt([
     {
       type: "input",
@@ -115,6 +122,11 @@ function promptEngineer () {
 };
 
 function promptIntern() {
+  console.log(`
+  =============
+  Add an Intern
+  =============
+  `);
   return inquirer.prompt([
     {
       type: "input",
@@ -152,12 +164,23 @@ function promptIntern() {
 };
 
 // -- funct that runs generate-site.js 
-// function finalTeam()
+function finalTeam() {
+  //  const pageHTML = generatePage(employees)
+  fs.writeFile('./index.html', generatePage(employees), err => {
+    if (err) throw err;
+  
+    console.log('HTML created');
+  });
+
+  fs.copyFile('./src/style.css', './dist/style.css', err => {
+    if (err) throw err;
+  
+    console.log('style sheet created');
+  });
+
+};
 
 promptManager()
-// .then(employees => {
-//   console.log(employees)
-//  });
 
 
 

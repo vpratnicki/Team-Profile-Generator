@@ -1,9 +1,23 @@
-const Manager = require('./lib/Manager');
+// function getEmployeeCards(employeesArr) {
+//     const cards = [];
+//     for (var i = 0; i < employeesArr.length; i++) {
+//         switch(employeesArr[i].role) {
+//             case 'manager':
+//                 cards.push(generateManager(employeesArr[i]))
+//                 break;
+//             case 'engineer':
+//                 cards.push(generateEngineer(employeesArr[i]))
+//                 break;
+//             case 'intern':
+//                 cards.push(generateIntern(employeesArr[i]))
+//                 break;
+//         }
+//     }
+//     return cards;
+// }
 
-
-
-
-const generateManager = (managerData) => {
+//create manager card
+const generateManager = manager => {
     return `
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
@@ -19,7 +33,26 @@ const generateManager = (managerData) => {
   `;
 };
 
-const generateEngineer = (engineerData) => {
+const sortCardTypes = employeesArr => {
+    // get array of just the engineer cards
+    const engineerCard = employeesArr.filter(engineer => {
+        if (engineer.role) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    // get array of just the intern cards
+    const internCard = employeesArr.filter(intern => {
+        if (intern.role) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+
+const generateEngineer = engineerCard.map(({ name, id, email, role, github }) => {
     return`
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
@@ -29,13 +62,13 @@ const generateEngineer = (engineerData) => {
         <ul class="list-group list-group-margins list-item-margins">
             <li class="list-group-item">ID: ${engineer.id}</li>
             <li class="list-group-item">Email: ${engineer.email}</li>
-            <li class="list-group-item">Office number: ${engineer.officeNumber}</li>
+            <li class="list-group-item">GitHub: ${engineer.github}</li>
         </ul>
     </div>
-    `
-};
+    `;
+});
 
-const generateIntern = (internData) => {
+const generateIntern = internCard.map(({ name, id, email, role, school }) => {
     return`
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
@@ -45,14 +78,15 @@ const generateIntern = (internData) => {
         <ul class="list-group list-group-margins list-item-margins">
             <li class="list-group-item">ID: ${intern.id}</li>
             <li class="list-group-item">Email: ${intern.email}</li>
-            <li class="list-group-item">Office number: ${intern.officeNumber}</li>
+            <li class="list-group-item">School: ${intern.school}</li>
         </ul>
     </div>
-    `
-};
+    `;
+});
 
-function generatetemplate(employeesArr) {
-    const empCards = getEmployeeCards(employeesArr);
+
+module.exports = generatetemplate => {
+    const { manager, engineer, intern }= generatetemplate;
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -77,30 +111,13 @@ function generatetemplate(employeesArr) {
       </header>
       <main class="container bg-image">
         <div class="card-deck">
-            ${empCards.join('')}
+            ${generateManager}
+            ${generateEngineer.join('')}
+            ${generateIntern.join('')}
         </div>
       </main>
     </body>
     </html>
-    `
-}
-
-function getEmployeeCards(employeesArr) {
-    const cards = [];
-    for (let i = 0; i < employeesArr.length; i++) {
-        switch(employeesArr[i].role) {
-            case 'Manager':
-                cards.push(generateManager(employeesArr[i]))
-                break;
-            case 'Engineer':
-                cards.push(generateEngineer(employeesArr[i]))
-                break;
-            case 'Intern':
-                cards.push(generateIntern(employeesArr[i]))
-                break;
-        }
-    }
-    return cards;
-}
-
-module.exports = generatetemplate;
+    `;
+  }
+};
