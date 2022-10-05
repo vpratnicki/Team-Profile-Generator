@@ -64,6 +64,7 @@ function addEmployees() {
           promptIntern();
           break;
         case 'No thanks, no more emploeeys to add':
+          console.log(employees)
           finalTeam();
           break;
       }
@@ -163,10 +164,10 @@ function promptIntern() {
   });
 };
 
-// -- funct that runs generate-site.js 
+// -- funct that calls page-template.js (generatePage)
 function finalTeam() {
-  //  const pageHTML = generatePage(employees)
-  fs.writeFile('./index.html', generatePage(employees), err => {
+  // const pageHTML = generatePage(employees)
+  fs.writeFile('./dist/index.html', generatePage(employees), err => {
     if (err) throw err;
   
     console.log('HTML created');

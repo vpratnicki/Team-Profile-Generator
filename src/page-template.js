@@ -17,76 +17,78 @@
 // }
 
 //create manager card
-const generateManager = manager => {
+const generateManager = Manager => {
     return `
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
-            <h5 class="card-title">${manager.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${manager.role}</h5>
+            <h5 class="card-title">${Manager.name}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${Manager.Managerrole}</h5>
         </div>
         <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${manager.id}</li>
-            <li class="list-group-item">Email: ${manger.email}</li>
-            <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+            <li class="list-group-item">ID: ${Manager.id}</li>
+            <li class="list-group-item">Email: ${Manager.Manageremail}</li>
+            <li class="list-group-item">Office number: ${Manager.officeNumber}</li>
         </ul>
     </div>
   `;
 };
 
-const sortCardTypes = employeesArr => {
+// const sortCardTypes = employeesArr => {
     // get array of just the engineer cards
-    const engineerCard = employeesArr.filter(engineer => {
-        if (engineer.role) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-    // get array of just the intern cards
-    const internCard = employeesArr.filter(intern => {
-        if (intern.role) {
-            return true;
-        } else {
-            return false;
-        }
-    });
+//     const engineerCard = employeesArr.filter(engineer => {
+//         if (engineer.role) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     });
+//     // get array of just the intern cards
+//     const internCard = employeesArr.filter(intern => {
+//         if (intern.role) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     })
+// };
 
 
-const generateEngineer = engineerCard.map(({ name, id, email, role, github }) => {
-    return`
-    <div class="card border-0 drop-shadow">
-        <div class="card-body bg-dark">
-            <h5 class="card-title">${engineer.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.role}</h5>
-        </div>
-        <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${engineer.id}</li>
-            <li class="list-group-item">Email: ${engineer.email}</li>
-            <li class="list-group-item">GitHub: ${engineer.github}</li>
-        </ul>
-    </div>
-    `;
-});
+// const generateEngineer = engineerCard.map(({ name, id, email, role, github }) => {
+//     return`
+//     <div class="card border-0 drop-shadow">
+//         <div class="card-body bg-dark">
+//             <h5 class="card-title">${engineer.name}</h5>
+//             <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.role}</h5>
+//         </div>
+//         <ul class="list-group list-group-margins list-item-margins">
+//             <li class="list-group-item">ID: ${engineer.id}</li>
+//             <li class="list-group-item">Email: ${engineer.email}</li>
+//             <li class="list-group-item">GitHub: ${engineer.github}</li>
+//         </ul>
+//     </div>
+//     `;
+// });
 
-const generateIntern = internCard.map(({ name, id, email, role, school }) => {
-    return`
-    <div class="card border-0 drop-shadow">
-        <div class="card-body bg-dark">
-            <h5 class="card-title">${intern.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.role}</h5>
-        </div>
-        <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${intern.id}</li>
-            <li class="list-group-item">Email: ${intern.email}</li>
-            <li class="list-group-item">School: ${intern.school}</li>
-        </ul>
-    </div>
-    `;
-});
+// const generateIntern = internCard.map(({ name, id, email, role, school }) => {
+//     return`
+//     <div class="card border-0 drop-shadow">
+//         <div class="card-body bg-dark">
+//             <h5 class="card-title">${intern.name}</h5>
+//             <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.role}</h5>
+//         </div>
+//         <ul class="list-group list-group-margins list-item-margins">
+//             <li class="list-group-item">ID: ${intern.id}</li>
+//             <li class="list-group-item">Email: ${intern.email}</li>
+//             <li class="list-group-item">School: ${intern.school}</li>
+//         </ul>
+//     </div>
+//     `;
+// });
 
 
-module.exports = generatetemplate => {
-    const { manager, engineer, intern }= generatetemplate;
+module.exports = employees => {
+    const { manager, engineers, interns }= employees;
+    console.log(employees);
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -111,13 +113,14 @@ module.exports = generatetemplate => {
       </header>
       <main class="container bg-image">
         <div class="card-deck">
-            ${generateManager}
-            ${generateEngineer.join('')}
-            ${generateIntern.join('')}
+        ${generateManager(manager)}
+        ${generateEngineer(engineers).join('')}
+        ${generateIntern(interns).join('')}
         </div>
       </main>
     </body>
     </html>
     `;
-  }
-};
+  };
+
+  //
