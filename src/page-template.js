@@ -16,33 +16,18 @@
 //     return cards;
 // }
 
-//create manager card
-const generateManager = Manager => {
-    return `
-    <div class="card border-0 drop-shadow">
-        <div class="card-body bg-dark">
-            <h5 class="card-title">${Manager.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${Manager.Managerrole}</h5>
-        </div>
-        <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${Manager.id}</li>
-            <li class="list-group-item">Email: ${Manager.Manageremail}</li>
-            <li class="list-group-item">Office number: ${Manager.officeNumber}</li>
-        </ul>
-    </div>
-  `;
-};
 
-// const sortCardTypes = employeesArr => {
-    // get array of just the engineer cards
-//     const engineerCard = employeesArr.filter(engineer => {
-//         if (engineer.role) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     });
-//     // get array of just the intern cards
+
+// {
+    //get array of just the engineer cards
+    // const engineerCard = employeesArr.filter(engineer => {
+    //     if (engineer.role) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // });
+    // get array of just the intern cards
 //     const internCard = employeesArr.filter(intern => {
 //         if (intern.role) {
 //             return true;
@@ -84,11 +69,29 @@ const generateManager = Manager => {
 //     </div>
 //     `;
 // });
+//create manager card
+function generateManager(manager) {
+    return `
+    <div class="card border-0 drop-shadow">
+        <div class="card-body bg-dark">
+            <h5 class="card-title">${manager.name}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${manager.role}</h5>
+        </div>
+        <ul class="list-group list-group-margins list-item-margins">
+            <li class="list-group-item">ID: ${manager.id}</li>
+            <li class="list-group-item">Email: ${manager.email}</li>
+            <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+        </ul>
+    </div>
+  `;
+};
 
 
 module.exports = employees => {
-    const { manager, engineers, interns }= employees;
+//  const [ manager, engineers, interns ]= employees;
+    let manager = employees[0]
     console.log(employees);
+    console.log('here is manager destructed from employees:', employees[0]);
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -114,8 +117,7 @@ module.exports = employees => {
       <main class="container bg-image">
         <div class="card-deck">
         ${generateManager(manager)}
-        ${generateEngineer(engineers).join('')}
-        ${generateIntern(interns).join('')}
+
         </div>
       </main>
     </body>
@@ -123,4 +125,5 @@ module.exports = employees => {
     `;
   };
 
-  //
+  // ${generateEngineer(engineers).join('')}
+  // ${generateIntern(interns).join('')}
