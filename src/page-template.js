@@ -16,59 +16,6 @@
 //     return cards;
 // }
 
-
-
-// {
-    //get array of just the engineer cards
-    // const engineerCard = employeesArr.filter(engineer => {
-    //     if (engineer.role) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // });
-    // get array of just the intern cards
-//     const internCard = employeesArr.filter(intern => {
-//         if (intern.role) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     })
-// };
-
-
-// const generateEngineer = engineerCard.map(({ name, id, email, role, github }) => {
-//     return`
-//     <div class="card border-0 drop-shadow">
-//         <div class="card-body bg-dark">
-//             <h5 class="card-title">${engineer.name}</h5>
-//             <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.role}</h5>
-//         </div>
-//         <ul class="list-group list-group-margins list-item-margins">
-//             <li class="list-group-item">ID: ${engineer.id}</li>
-//             <li class="list-group-item">Email: ${engineer.email}</li>
-//             <li class="list-group-item">GitHub: ${engineer.github}</li>
-//         </ul>
-//     </div>
-//     `;
-// });
-
-// const generateIntern = internCard.map(({ name, id, email, role, school }) => {
-//     return`
-//     <div class="card border-0 drop-shadow">
-//         <div class="card-body bg-dark">
-//             <h5 class="card-title">${intern.name}</h5>
-//             <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.role}</h5>
-//         </div>
-//         <ul class="list-group list-group-margins list-item-margins">
-//             <li class="list-group-item">ID: ${intern.id}</li>
-//             <li class="list-group-item">Email: ${intern.email}</li>
-//             <li class="list-group-item">School: ${intern.school}</li>
-//         </ul>
-//     </div>
-//     `;
-// });
 //create manager card
 function generateManager(manager) {
     return `
@@ -87,11 +34,72 @@ function generateManager(manager) {
 };
 
 
+
+function generateCardTypes() {
+    //get array of just the engineer cards
+    const engineerCard = employees.filter(Engineer => {
+        if (Engineer.role) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    // get array of just the intern cards
+    const internCard = employees.filter(Intern => {
+        if (Intern.role) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    
+    const generateEngineer = engineerCard.map(({ name, id, email, role, github }) => {
+    return`
+    <div class="card border-0 drop-shadow">
+        <div class="card-body bg-dark">
+            <h5 class="card-title">${engineer.name}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.role}</h5>
+        </div>
+        <ul class="list-group list-group-margins list-item-margins">
+            <li class="list-group-item">ID: ${engineer.id}</li>
+            <li class="list-group-item">Email: ${engineer.email}</li>
+            <li class="list-group-item">GitHub: ${engineer.github}</li>
+        </ul>
+    </div>
+    `;
+    });
+    
+    const generateIntern = internCard.map(({ name, id, email, role, school }) => {
+    return`
+    <div class="card border-0 drop-shadow">
+        <div class="card-body bg-dark">
+            <h5 class="card-title">${intern.name}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.role}</h5>
+        </div>
+        <ul class="list-group list-group-margins list-item-margins">
+            <li class="list-group-item">ID: ${intern.id}</li>
+            <li class="list-group-item">Email: ${intern.email}</li>
+            <li class="list-group-item">School: ${intern.school}</li>
+        </ul>
+    </div>
+    `;
+    });
+    return `
+    // ${generateEngineer(engineers).join('')}
+    // ${generateIntern(interns).join('')}
+    `
+
+};
+
 module.exports = employees => {
 //  const [ manager, engineers, interns ]= employees;
     let manager = employees[0]
+    let other = employees[1]
     console.log(employees);
     console.log('here is manager destructed from employees:', employees[0]);
+    console.log('here is the second employee:', employees[1]);
+
+
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -117,6 +125,7 @@ module.exports = employees => {
       <main class="container bg-image">
         <div class="card-deck">
         ${generateManager(manager)}
+        ${generateCardTypes()}
 
         </div>
       </main>
@@ -125,5 +134,18 @@ module.exports = employees => {
     `;
   };
 
-  // ${generateEngineer(engineers).join('')}
-  // ${generateIntern(interns).join('')}
+//   function generateCardTypes(otherEmployees) {
+//     const cards = [];
+//     for (var i = 1; i < otherEmployees.length; i++) {
+//         switch(otherEmployees[i].role) {
+//         case 'Engineer':
+//             cards.push(generateEngineer(otherEmployees[i]))
+//             console.log('Here are all the engineers arrys', )
+//             break;
+//         case 'Intern':
+//             cards.push(generateIntern(otherEmployees[i]))
+//             break;
+//             }
+//         }
+//     return cards;
+// }
