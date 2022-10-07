@@ -10,7 +10,7 @@ function generateCardTypes(employees) {
         </div>
         <ul class="list-group list-group-margins list-item-margins">
             <li class="list-group-item">ID: ${manager.getID()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
             <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
         </ul>
     </div>
@@ -22,12 +22,12 @@ function generateEngineer(engineer) {
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
             <h5 class="card-title">${engineer.getName()}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.getRole()}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-glasses mr-2"></i>${engineer.getRole()}</h5>
         </div>
         <ul class="list-group list-group-margins list-item-margins">
             <li class="list-group-item">ID: ${engineer.getID()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</li>
-            <li class="list-group-item">GitHub: a href="https://github.com/${engineer.GetGithub()}" target="_blank">${engineer.GetGithub()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank">${engineer.getGithub()}</a></li>
         </ul>
     </div>
     `;
@@ -42,7 +42,7 @@ function generateIntern(intern) {
             </div>
             <ul class="list-group list-group-margins list-item-margins">
                 <li class="list-group-item">ID: ${intern.getID()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
                 <li class="list-group-item">School: ${intern.getSchool()}</li>
             </ul>
         </div>
@@ -50,57 +50,47 @@ function generateIntern(intern) {
     };
 
     const cards = [];
-    for (var i = 0; i < employeesArr.length; i++) {
-        switch(employeesArr[i].role) {
-            case 'Manager':
-                cards.push(generateManager(employeesArr[i]))
-                break;
-            case 'Engineer':
-                cards.push(generateEngineer(employeesArr[i]))
-                break;
-            case 'Intern':
-                cards.push(generateIntern(employeesArr[i]))
-                break;
-        }
-    }
-    return cards;
+    cards.push(employees.filter(employee => employee.getRole() === "Manager")
+    .map(manager => generateManager(manager))
+    );
+    cards.push(employees.filter(employee => employee.getRole() === "Engineer")
+    .map(engineer => generateEngineer(engineer))
+    );
+    cards.push(employees.filter(employee => employee.getRole() === "Intern")
+    .map(intern => generateIntern(intern))
+    );
+    return cards.join("");
+
 }
-        return `
-        // ${generateEngineer(engineers).join('')}
-        // ${generateIntern(interns).join('')}
-        `
-    
-    };
-
-function generateCardTypes() {
-    //get array of just the engineer cards
-    const engineerCard = employees.filter(Engineer => {
-        if (Engineer.role) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-    // get array of just the intern cards
-    const internCard = employees.filter(Intern => {
-        if (Intern.role) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-    
-};
-    
 
 
+// function generateCardTypes() {
+//     //get array of just the engineer cards
+//     const engineerCard = employees.filter(Engineer => {
+//         if (Engineer.role) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     });
+//     // get array of just the intern cards
+//     const internCard = employees.filter(Intern => {
+//         if (Intern.role) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     });
+    
+// };
+    
 module.exports = employees => {
 //  const [ manager, engineers, interns ]= employees;
-    let manager = employees[0]
-    let other = employees[1]
-    console.log(employees);
-    console.log('here is manager destructed from employees:', employees[0]);
-    console.log('here is the second employee:', employees[1]);
+    // let manager = employees[0]
+    // let other = employees[1]
+    // console.log(employees);
+    // console.log('here is manager destructed from employees:', employees[0]);
+    // console.log('here is the second employee:', employees[1]);
 
 
     return `
