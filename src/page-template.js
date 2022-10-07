@@ -1,39 +1,76 @@
-// function getEmployeeCards(employeesArr) {
-//     const cards = [];
-//     for (var i = 0; i < employeesArr.length; i++) {
-//         switch(employeesArr[i].role) {
-//             case 'manager':
-//                 cards.push(generateManager(employeesArr[i]))
-//                 break;
-//             case 'engineer':
-//                 cards.push(generateEngineer(employeesArr[i]))
-//                 break;
-//             case 'intern':
-//                 cards.push(generateIntern(employeesArr[i]))
-//                 break;
-//         }
-//     }
-//     return cards;
-// }
+function generateCardTypes(employees) { 
 
 //create manager card
-function generateManager(manager) {
+    function generateManager(manager) {
     return `
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
-            <h5 class="card-title">${manager.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${manager.role}</h5>
+            <h5 class="card-title">${manager.getName()}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${manager.getRole()}</h5>
         </div>
         <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${manager.id}</li>
-            <li class="list-group-item">Email: ${manager.email}</li>
-            <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+            <li class="list-group-item">ID: ${manager.getID()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</li>
+            <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
         </ul>
     </div>
   `;
-};
+    };
 
+function generateEngineer(engineer) {
+    return`
+    <div class="card border-0 drop-shadow">
+        <div class="card-body bg-dark">
+            <h5 class="card-title">${engineer.getName()}</h5>
+            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.getRole()}</h5>
+        </div>
+        <ul class="list-group list-group-margins list-item-margins">
+            <li class="list-group-item">ID: ${engineer.getID()}</li>
+            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</li>
+            <li class="list-group-item">GitHub: a href="https://github.com/${engineer.GetGithub()}" target="_blank">${engineer.GetGithub()}</li>
+        </ul>
+    </div>
+    `;
+    };
 
+function generateIntern(intern) {
+    return`
+        <div class="card border-0 drop-shadow">
+            <div class="card-body bg-dark">
+                <h5 class="card-title">${intern.getName()}</h5>
+                <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.getRole()}</h5>
+            </div>
+            <ul class="list-group list-group-margins list-item-margins">
+                <li class="list-group-item">ID: ${intern.getID()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</li>
+                <li class="list-group-item">School: ${intern.getSchool()}</li>
+            </ul>
+        </div>
+        `;
+    };
+
+    const cards = [];
+    for (var i = 0; i < employeesArr.length; i++) {
+        switch(employeesArr[i].role) {
+            case 'Manager':
+                cards.push(generateManager(employeesArr[i]))
+                break;
+            case 'Engineer':
+                cards.push(generateEngineer(employeesArr[i]))
+                break;
+            case 'Intern':
+                cards.push(generateIntern(employeesArr[i]))
+                break;
+        }
+    }
+    return cards;
+}
+        return `
+        // ${generateEngineer(engineers).join('')}
+        // ${generateIntern(interns).join('')}
+        `
+    
+    };
 
 function generateCardTypes() {
     //get array of just the engineer cards
@@ -53,43 +90,9 @@ function generateCardTypes() {
         }
     });
     
-    const generateEngineer = engineerCard.map(({ name, id, email, role, github }) => {
-    return`
-    <div class="card border-0 drop-shadow">
-        <div class="card-body bg-dark">
-            <h5 class="card-title">${engineer.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${engineer.role}</h5>
-        </div>
-        <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${engineer.id}</li>
-            <li class="list-group-item">Email: ${engineer.email}</li>
-            <li class="list-group-item">GitHub: ${engineer.github}</li>
-        </ul>
-    </div>
-    `;
-    });
-    
-    const generateIntern = internCard.map(({ name, id, email, role, school }) => {
-    return`
-    <div class="card border-0 drop-shadow">
-        <div class="card-body bg-dark">
-            <h5 class="card-title">${intern.name}</h5>
-            <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.role}</h5>
-        </div>
-        <ul class="list-group list-group-margins list-item-margins">
-            <li class="list-group-item">ID: ${intern.id}</li>
-            <li class="list-group-item">Email: ${intern.email}</li>
-            <li class="list-group-item">School: ${intern.school}</li>
-        </ul>
-    </div>
-    `;
-    });
-    return `
-    // ${generateEngineer(engineers).join('')}
-    // ${generateIntern(interns).join('')}
-    `
-
 };
+    
+
 
 module.exports = employees => {
 //  const [ manager, engineers, interns ]= employees;
@@ -124,8 +127,8 @@ module.exports = employees => {
       </header>
       <main class="container bg-image">
         <div class="card-deck">
-        ${generateManager(manager)}
-        ${generateCardTypes()}
+
+        ${generateCardTypes(employees)}
 
         </div>
       </main>
@@ -133,6 +136,7 @@ module.exports = employees => {
     </html>
     `;
   };
+
 
 //   function generateCardTypes(otherEmployees) {
 //     const cards = [];
@@ -149,3 +153,5 @@ module.exports = employees => {
 //         }
 //     return cards;
 // }
+
+// ${generateManager(manager)}
