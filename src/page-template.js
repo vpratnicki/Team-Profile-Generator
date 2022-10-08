@@ -1,6 +1,6 @@
 function generateCardTypes(employees) { 
 
-//create manager card
+    //create manager card/html
     function generateManager(manager) {
     return `
     <div class="card border-0 drop-shadow">
@@ -17,7 +17,8 @@ function generateCardTypes(employees) {
   `;
     };
 
-function generateEngineer(engineer) {
+    // create engineer card/html
+    function generateEngineer(engineer) {
     return`
     <div class="card border-0 drop-shadow">
         <div class="card-body bg-dark">
@@ -33,12 +34,13 @@ function generateEngineer(engineer) {
     `;
     };
 
-function generateIntern(intern) {
+    // create intern card/html
+    function generateIntern(intern) {
     return`
         <div class="card border-0 drop-shadow">
             <div class="card-body bg-dark">
                 <h5 class="card-title">${intern.getName()}</h5>
-                <h5 class="card-title"><i class="fa-solid fa-mug-hot mr-2"></i>${intern.getRole()}</h5>
+                <h5 class="card-title"><i class="fa-solid fa-user-graduate mr-2"></i>${intern.getRole()}</h5>
             </div>
             <ul class="list-group list-group-margins list-item-margins">
                 <li class="list-group-item">ID: ${intern.getID()}</li>
@@ -49,6 +51,7 @@ function generateIntern(intern) {
         `;
     };
 
+    //filter and loop through the array and indenify which card/employee should be called
     const cards = [];
     cards.push(employees.filter(employee => employee.getRole() === "Manager")
     .map(manager => generateManager(manager))
@@ -60,39 +63,10 @@ function generateIntern(intern) {
     .map(intern => generateIntern(intern))
     );
     return cards.join("");
+};
 
-}
-
-
-// function generateCardTypes() {
-//     //get array of just the engineer cards
-//     const engineerCard = employees.filter(Engineer => {
-//         if (Engineer.role) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     });
-//     // get array of just the intern cards
-//     const internCard = employees.filter(Intern => {
-//         if (Intern.role) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     });
-    
-// };
-    
+// html template 
 module.exports = employees => {
-//  const [ manager, engineers, interns ]= employees;
-    // let manager = employees[0]
-    // let other = employees[1]
-    // console.log(employees);
-    // console.log('here is manager destructed from employees:', employees[0]);
-    // console.log('here is the second employee:', employees[1]);
-
-
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -117,31 +91,10 @@ module.exports = employees => {
       </header>
       <main class="container bg-image">
         <div class="card-deck">
-
         ${generateCardTypes(employees)}
-
         </div>
       </main>
     </body>
     </html>
     `;
   };
-
-
-//   function generateCardTypes(otherEmployees) {
-//     const cards = [];
-//     for (var i = 1; i < otherEmployees.length; i++) {
-//         switch(otherEmployees[i].role) {
-//         case 'Engineer':
-//             cards.push(generateEngineer(otherEmployees[i]))
-//             console.log('Here are all the engineers arrys', )
-//             break;
-//         case 'Intern':
-//             cards.push(generateIntern(otherEmployees[i]))
-//             break;
-//             }
-//         }
-//     return cards;
-// }
-
-// ${generateManager(manager)}

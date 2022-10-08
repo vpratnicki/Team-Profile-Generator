@@ -40,7 +40,7 @@ function promptManager() {
     
     // -- add it to the array
     employees.push(manager);
-    console.log(manager);
+    // console.log(manager);
     addEmployees();
 })
 };
@@ -64,7 +64,7 @@ function addEmployees() {
           promptIntern();
           break;
         case 'No thanks, no more emploeeys to add':
-          console.log(employees)
+          // console.log(employees)
           finalTeam();
           break;
       }
@@ -116,7 +116,8 @@ function promptEngineer () {
     );
     // -- add it to the array
     employees.push(engineer);
-    console.log(engineer);
+    // console.log(engineer);
+
     // -- ask if new employees needed
     addEmployees()
   });
@@ -150,15 +151,11 @@ function promptIntern() {
       message: "Enter the intern's school",
     }
   ]).then (answers => {
-    const intern = new Intern(
-      answers.name,
-      answers.id,
-      answers.email,
-      answers.school
-    );
+    const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
     // -- add it to the array
     employees.push(intern);
-    console.log(intern);
+    // console.log(intern);
+  
     // -- ask if new employees needed
     addEmployees();
   });
